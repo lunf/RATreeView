@@ -442,6 +442,11 @@ typedef enum RATreeViewRowAnimation {
 
 
 ///------------------------------------------------
+/// @name Mavigation button
+///------------------------------------------------
+@property (nonatomic, strong) UIButton *menuButton;
+
+///------------------------------------------------
 /// @name Managing the Delegate and the Data Source
 ///------------------------------------------------
 
@@ -471,6 +476,7 @@ typedef enum RATreeViewRowAnimation {
 - (void)collapseRowForItem:(id)item withRowAnimation:(RATreeViewRowAnimation)animation;
 - (void)expandRowForItem:(id)item;
 - (void)collapseRowForItem:(id)item;
+- (void)expandOrCollapseRowForItem:(id)item;
 @property (nonatomic) RATreeViewRowAnimation rowsExpandingAnimation;
 @property (nonatomic) RATreeViewRowAnimation rowsCollapsingAnimation;
 
@@ -561,6 +567,7 @@ typedef enum RATreeViewRowAnimation {
 @property (nonatomic) BOOL allowsMultipleSelection;
 @property (nonatomic) BOOL allowsSelectionDuringEditing;
 @property (nonatomic) BOOL allowsMultipleSelectionDuringEditing;
+@property (nonatomic) BOOL allowsSelectionWithoutExpandOrCollapseRow;
 
 
 ///------------------------------------------------

@@ -89,6 +89,13 @@
 {
   self = [super initWithFrame:frame];
   if (self) {
+      
+      frame.origin.y += 1.0;
+      self.menuButton = [[UIButton alloc] initWithFrame:frame];
+      self.menuButton.titleLabel.text = @"Press here";
+      [self.menuButton addTarget:self action:@selector(onHandleMenuTap:) forControlEvents:UIControlEventTouchUpInside];
+      [self addSubview:self.menuButton];
+      
     CGRect innerFrame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
     [self commonInitWithFrame:innerFrame style:style];
   }
@@ -114,11 +121,14 @@
   tableView.dataSource = (id<UITableViewDataSource>)self;
   tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
   tableView.backgroundColor = [UIColor clearColor];
+    
+
   [self addSubview:tableView];
   [self setTableView:tableView];
   
   self.rowsExpandingAnimation = RATreeViewRowAnimationTop;
   self.rowsCollapsingAnimation = RATreeViewRowAnimationBottom;
+    self.allowsSelectionWithoutExpandOrCollapseRow = YES;
 }
 
 
@@ -199,7 +209,12 @@
 
 
 #pragma mark Expanding and Collapsing Rows
-
+- (BOOL) isExpandedForItem:(id)item {
+    NSIndexPath *indexPath = [self indexPathForItem:item];
+    RATreeNode *treeNode = [self treeNodeForIndexPath:indexPath];
+    
+    return treeNode.expanded;
+}
 - (void)expandRowForItem:(id)item
 {
   [self expandRowForItem:item withRowAnimation:self.rowsExpandingAnimation];
@@ -225,6 +240,19 @@
   NSIndexPath *indexPath = [self indexPathForItem:item];
   RATreeNode *treeNode = [self treeNodeForIndexPath:indexPath];
   [self collapseCellForTreeNode:treeNode withRowAnimation:animation];
+}
+
+- (void)expandOrCollapseRowForItem:(id)item {
+    NSIndexPath *indexPath = [self indexPathForItem:item];
+    
+    RATreeNode *treeNode = [self treeNodeForIndexPath:indexPath];
+    
+    if ([treeNode expanded]) {
+        [self collapseRowForItem:item];
+    }
+    else {
+        [self expandRowForItem:item];
+    }
 }
 
 
@@ -502,6 +530,7 @@
 {
   [self setupTreeStructure];
   [self.tableView reloadData];
+
 }
 
 - (void)reloadRowsForItems:(NSArray *)items withRowAnimation:(RATreeViewRowAnimation)animation
@@ -562,5 +591,14 @@
   
   return [items copy];
 }
+
+#pragma mark - Actions
+
+- (void)onHandleMenuTap:(id)sender
+{
+    
+}
+
+
 
 @end

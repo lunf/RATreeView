@@ -98,11 +98,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
   RATreeNode *treeNode = [self treeNodeForIndexPath:indexPath];
   if ([self.delegate respondsToSelector:@selector(treeView:didSelectRowForItem:)]) {
     [self.delegate treeView:self didSelectRowForItem:treeNode.item];
   }
-  
+
+    if (self.allowsSelectionWithoutExpandOrCollapseRow) {
+        return;
+    }
+    
   if (treeNode.expanded) {
     if ([self.delegate respondsToSelector:@selector(treeView:shouldCollapaseRowForItem:)]) {
       if ([self.delegate treeView:self shouldCollapaseRowForItem:treeNode.item]) {

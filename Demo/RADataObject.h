@@ -23,11 +23,14 @@
 @interface RADataObject : NSObject
 
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *imageLink;
 @property (strong, nonatomic) NSArray *children;
+@property (nonatomic, assign) NSInteger level;
+@property (nonatomic, assign) BOOL expanded;
 
-- (id)initWithName:(NSString *)name children:(NSArray *)array;
+- (id)initWithName:(NSString *)name image:(NSString*) imageLink children:(NSArray *)array;
 
-+ (id)dataObjectWithName:(NSString *)name children:(NSArray *)children;
++ (id)dataObjectWithName:(NSString *)name imageLink:(NSString *)imageLink children:(NSArray *)children;
 
 - (void)addChild:(id)child;
 - (void)removeChild:(id)child;

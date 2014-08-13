@@ -20,12 +20,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class RADataObject;
+
 @interface RATableViewCell : UITableViewCell
 
-@property (nonatomic, copy) void (^additionButtonTapAction)(id sender);
-@property (nonatomic) BOOL additionButtonHidden;
+@property (weak, nonatomic) IBOutlet UIButton *expandButton;
 
-- (void)setupWithTitle:(NSString *)title detailText:(NSString *)detailText level:(NSInteger)level additionButtonHidden:(BOOL)additionButtonHidden;
-- (void)setAdditionButtonHidden:(BOOL)additionButtonHidden animated:(BOOL)animated;
+@property (nonatomic, copy) void (^expandButtonTapAction)(RADataObject*);
 
+- (void) setUpWithObject:(RADataObject *) dataObject;
+- (void) switchExpandIcon:(BOOL) isExpanded;
 @end

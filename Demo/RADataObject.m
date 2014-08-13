@@ -23,19 +23,20 @@
 @implementation RADataObject
 
 
-- (id)initWithName:(NSString *)name children:(NSArray *)children
-{
-  self = [super init];
-  if (self) {
-    self.children = [NSArray arrayWithArray:children];
-    self.name = name;
-  }
-  return self;
+- (id)initWithName:(NSString *)name image:(NSString*) imageLink children:(NSArray *)array {
+    
+    self = [super init];
+    if (self) {
+        self.children = [NSArray arrayWithArray:array];
+        self.name = name;
+        self.imageLink = imageLink;
+    }
+    return self;
 }
 
-+ (id)dataObjectWithName:(NSString *)name children:(NSArray *)children
-{
-  return [[self alloc] initWithName:name children:children];
++ (id)dataObjectWithName:(NSString *)name imageLink:(NSString *)imageLink children:(NSArray *)children {
+    
+    return [[self alloc] initWithName:name image:imageLink children:children];
 }
 
 - (void)addChild:(id)child
