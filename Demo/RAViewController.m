@@ -53,15 +53,6 @@
   
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  
-  
-    
-    
-}
-
 - (void) exandAllRows:(NSArray *) dataArray {
     
     for (id item in dataArray) {
@@ -118,7 +109,6 @@
     }
     
     [self.treeView setEditing:!self.treeView.isEditing animated:YES];
-    [self updateNavigationItemButton];
     
 
 }
